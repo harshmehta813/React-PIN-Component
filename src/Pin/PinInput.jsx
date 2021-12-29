@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import PinItem from "./PinItem";
 
-function PinInput({ noOfBoxes = 4, length = 1, onChange }) {
+function PinInput({ noOfBoxes = 4, length = 4, onChange }) {
 	const [values, setValues] = useState(() => new Array(noOfBoxes).fill(""));
 	const arr = new Array(noOfBoxes).fill(0);
 	const ref = useRef([]);
@@ -48,14 +48,7 @@ function PinInput({ noOfBoxes = 4, length = 1, onChange }) {
 	};
 
 	return (
-		<div
-			style={{
-				display: "flex",
-				gap: "1rem",
-				justifyContent: "center"
-			}}
-			onPaste={handlePaste}
-		>
+		<div className="comp" onPaste={handlePaste}>
 			{arr.map((_, i) => (
 				// <input key={i} ref={(el) => (ref.current[i] = el)} />
 				<PinItem
@@ -64,6 +57,7 @@ function PinInput({ noOfBoxes = 4, length = 1, onChange }) {
 					handleChange={(v) => handleChange(v, i)}
 					handleBackSpace={(v) => handleBackSpace(v, i)}
 					length={length}
+					values={values}
 				/>
 			))}
 		</div>
